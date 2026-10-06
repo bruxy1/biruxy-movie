@@ -1,9 +1,19 @@
-BIRUXY MOVIES - FRONTEND PROTOTYPE
+BIRUXY MOVIES — FINAL FRONTEND BUILD
 
-Flow:
-ADUNLOCK username -> movie website -> MOVIES / PRIVATE -> online video player.
+Admin prototype:
+Username: shadab
+Password: biruxy*@786
 
-This version is frontend-only. Username validation, 12-hour expiry, secure admin,
-database and real uploads must be connected to a backend before production use.
+Features:
+- MOVIES and PRIVATE sections
+- Username access gate
+- Admin login
+- Admin dashboard
+- Add title, poster URL, video URL, description
+- Delete content
+- Online HTML5 video player
+- Responsive design
 
-Admin-uploaded content can later be stored in the backend and rendered in these sections.
+IMPORTANT:
+This is the complete frontend build. The username check in this file is intentionally not a real security boundary.
+For production, connect it to a backend/database so the ADUNLOCK-generated username is verified server-side and expires after 12 hours. Admin authentication and video storage should also be server-side.
