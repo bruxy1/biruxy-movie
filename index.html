@@ -1,97 +1,1327 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BIRUXY MOVIES</title>
+
 <style>
-:root{--bg:#070707;--panel:#101010;--line:#222;--muted:#8c8c8c;--text:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
-button,input,textarea,select{font:inherit}button{cursor:pointer}
-.top{position:sticky;top:0;z-index:20;background:#080808ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{max-width:1200px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{font-weight:900;font-size:22px;letter-spacing:1.5px}.brand small{display:block;color:#777;font-size:9px;letter-spacing:3px;margin-top:3px}
-.navlinks{display:flex;gap:6px}.navlinks button{background:transparent;color:#888;border:0;padding:10px 12px;font-weight:800}.navlinks button.active,.navlinks button:hover{color:#fff}
-.wrap{max-width:1200px;margin:auto;padding:0 22px}.hero{padding:70px 0 45px;border-bottom:1px solid var(--line)}
-.kicker{color:#888;font-size:12px;letter-spacing:3px;font-weight:800}.hero h1{font-size:clamp(40px,7vw,76px);line-height:.98;margin:14px 0}.hero p{max-width:650px;color:#999;line-height:1.7}
-.login{display:flex;gap:10px;max-width:590px;margin-top:28px}.login input,.form input,.form textarea,.form select{width:100%;background:#111;border:1px solid #303030;color:#fff;border-radius:8px;padding:13px;outline:none}.login input:focus,.form input:focus,.form textarea:focus{border-color:#777}.primary{background:#fff;color:#000;border:0;border-radius:8px;padding:13px 20px;font-weight:900}.secondary{background:#171717;color:#fff;border:1px solid #333;border-radius:8px;padding:12px 16px;font-weight:800}
-.status{font-size:12px;color:#777;margin-top:10px}.section{padding:35px 0}.section h2{font-size:26px;margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}.card{background:#0f0f0f;border:1px solid #222;border-radius:10px;overflow:hidden;transition:.18s}.card:hover{transform:translateY(-3px);border-color:#444}.poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:#181818}.cardbody{padding:13px}.cardbody h3{font-size:16px;margin:0 0 7px}.cardbody p{font-size:12px;color:#777;line-height:1.45;margin:0}.empty{border:1px dashed #333;border-radius:10px;padding:40px;text-align:center;color:#666}
-footer{border-top:1px solid #1c1c1c;color:#666;padding:30px 22px;text-align:center;font-size:12px}
-.overlay{position:fixed;inset:0;background:#000d;z-index:50;display:flex;align-items:center;justify-content:center;padding:18px}.box{width:min(900px,100%);max-height:92vh;overflow:auto;background:#101010;border:1px solid #333;border-radius:12px;padding:22px}.close{float:right;background:transparent;border:0;color:#999;font-size:26px}.player{width:100%;aspect-ratio:16/9;background:#000;border-radius:8px}.details h2{margin:18px 0 7px}.details p{color:#999;line-height:1.6}.hidden{display:none!important}
-.admin{position:fixed;right:18px;bottom:18px;z-index:25;background:#171717;border:1px solid #333;color:#bbb;border-radius:50%;width:45px;height:45px;font-weight:900}
-.form{display:grid;gap:12px}.form textarea{min-height:110px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.adminhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.adminlist{display:grid;gap:10px;margin-top:20px}.adminitem{display:flex;gap:12px;align-items:center;background:#151515;border:1px solid #242424;padding:10px;border-radius:8px}.adminitem img{width:45px;height:65px;object-fit:cover;border-radius:4px}.adminitem div{flex:1}.danger{background:#1c1010;color:#f77;border:1px solid #422;border-radius:7px;padding:8px 10px}
-@media(max-width:650px){.login{flex-direction:column}.row{grid-template-columns:1fr}.nav{padding:14px}.wrap{padding:0 14px}.grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#070707;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(7,7,7,.96);
+    border-bottom:1px solid #222;
+}
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+    padding:16px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    display:block;
+    color:#777;
+    font-size:9px;
+    letter-spacing:4px;
+    margin-top:3px;
+}
+
+.nav button{
+    background:none;
+    border:0;
+    color:#777;
+    font-weight:bold;
+    margin-left:18px;
+    padding:8px;
+}
+
+.nav button.active,
+.nav button:hover{
+    color:#fff;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 22px;
+}
+
+.hero{
+    padding:75px 0 45px;
+    border-bottom:1px solid #202020;
+}
+
+.hero small{
+    color:#777;
+    letter-spacing:3px;
+    font-weight:bold;
+}
+
+.hero h1{
+    font-size:clamp(42px,7vw,76px);
+    line-height:.95;
+    margin:15px 0;
+}
+
+.hero p{
+    max-width:650px;
+    color:#999;
+    line-height:1.7;
+}
+
+.login{
+    display:flex;
+    gap:10px;
+    max-width:570px;
+    margin-top:28px;
+}
+
+.login input{
+    flex:1;
+    background:#111;
+    border:1px solid #333;
+    color:white;
+    padding:14px;
+    border-radius:8px;
+    outline:none;
+}
+
+.primary{
+    background:#fff;
+    color:#000;
+    border:0;
+    border-radius:8px;
+    padding:14px 22px;
+    font-weight:900;
+}
+
+.secondary{
+    background:#151515;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:10px 14px;
+    font-weight:bold;
+}
+
+.status{
+    color:#777;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.section{
+    padding:38px 0;
+}
+
+.section h2{
+    font-size:26px;
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:#101010;
+    border:1px solid #222;
+    border-radius:10px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#444;
+}
+
+.poster{
+    width:100%;
+    aspect-ratio:2/3;
+    object-fit:cover;
+    background:#171717;
+}
+
+.card-body{
+    padding:13px;
+}
+
+.card-body h3{
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.card-body p{
+    color:#777;
+    font-size:12px;
+    line-height:1.5;
+    min-height:35px;
+}
+
+.watch{
+    width:100%;
+    margin-top:12px;
+}
+
+.empty{
+    border:1px dashed #333;
+    padding:45px;
+    text-align:center;
+    color:#666;
+    border-radius:10px;
+}
+
+footer{
+    border-top:1px solid #222;
+    padding:30px;
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    margin-top:40px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* MODAL */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:rgba(0,0,0,.88);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.modal{
+    width:min(900px,100%);
+    max-height:92vh;
+    overflow:auto;
+    background:#111;
+    border:1px solid #333;
+    border-radius:12px;
+    padding:22px;
+}
+
+.close{
+    float:right;
+    background:none;
+    border:0;
+    color:#999;
+    font-size:28px;
+}
+
+.video{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:8px;
+    margin-top:15px;
+}
+
+.movie-details{
+    margin-top:18px;
+}
+
+.movie-details p{
+    color:#999;
+    line-height:1.6;
+    margin-top:8px;
+}
+
+/* ADMIN */
+
+.admin-btn{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:200;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:1px solid #333;
+    background:#151515;
+    color:#aaa;
+    font-weight:bold;
+}
+
+.form{
+    display:grid;
+    gap:13px;
+    margin-top:20px;
+}
+
+.form input,
+.form textarea,
+.form select{
+    width:100%;
+    background:#151515;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:13px;
+    outline:none;
+}
+
+.form textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.admin-list{
+    margin-top:25px;
+    display:grid;
+    gap:10px;
+}
+
+.admin-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:8px;
+    padding:10px;
+}
+
+.admin-item img{
+    width:48px;
+    height:65px;
+    object-fit:cover;
+    border-radius:4px;
+}
+
+.admin-info{
+    flex:1;
+}
+
+.admin-info strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.admin-info small{
+    color:#777;
+}
+
+.delete{
+    background:#211010;
+    border:1px solid #422;
+    color:#f77;
+    padding:8px 10px;
+    border-radius:6px;
+}
+
+.admin-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .nav{
+        padding:14px;
+    }
+
+    .container{
+        padding:0 14px;
+    }
+
+    .login{
+        flex-direction:column;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .admin-item{
+        align-items:flex-start;
+    }
+}
 </style>
 </head>
-<body>
-<header class="top"><div class="nav"><div class="brand">BIRUXY<small>MOVIES</small></div><div class="navlinks"><button class="active" data-tab="movies">MOVIES</button><button data-tab="private">PRIVATE</button></div></div></header>
 
-<main class="wrap">
+<body>
+
+<header>
+<div class="nav">
+
+    <div class="logo">
+        BIRUXY
+        <span>MOVIES</span>
+    </div>
+
+    <div>
+        <button class="active" onclick="openTab('movies',this)">
+            MOVIES
+        </button>
+
+        <button onclick="openTab('private',this)">
+            PRIVATE
+        </button>
+    </div>
+
+</div>
+</header>
+
+
+<main class="container">
+
 <section class="hero">
-<div class="kicker">ONLINE STREAMING</div>
-<h1>Watch.<br>Enjoy.</h1>
-<p>Enter the username generated by ADUNLOCK. Valid access will unlock the movie collection. Your account system will be connected to server-side 12-hour verification in the next backend step.</p>
-<div class="login"><input id="username" autocomplete="off" placeholder="Enter your username"><button class="primary" id="loginBtn">LOGIN</button></div>
-<div id="status" class="status">Access required to watch content.</div>
+
+    <small>ONLINE STREAMING</small>
+
+    <h1>
+        Watch.<br>
+        Enjoy.
+    </h1>
+
+    <p>
+        Enter the username generated by ADUNLOCK
+        to access the movie collection.
+    </p>
+
+    <div class="login">
+
+        <input
+            id="username"
+            placeholder="Enter your username"
+            autocomplete="off"
+        >
+
+        <button
+            class="primary"
+            onclick="loginUser()"
+        >
+            LOGIN
+        </button>
+
+    </div>
+
+    <div id="status" class="status">
+        Enter your ADUNLOCK username to continue.
+    </div>
+
 </section>
 
-<section id="movies" class="section"><h2>MOVIES</h2><div id="movieGrid" class="grid"></div></section>
-<section id="private" class="section hidden"><h2>PRIVATE</h2><div id="privateGrid" class="grid"></div></section>
+
+<section id="movies" class="section">
+
+    <h2>MOVIES</h2>
+
+    <div id="movieGrid" class="grid"></div>
+
+</section>
+
+
+<section id="private" class="section hidden">
+
+    <h2>PRIVATE</h2>
+
+    <div id="privateGrid" class="grid"></div>
+
+</section>
+
 </main>
 
-<footer>BIRUXY MOVIES</footer>
-<button class="admin" id="adminBtn" title="Admin">A</button>
 
-<div id="playerOverlay" class="overlay hidden"><div class="box"><button class="close" id="playerClose">×</button><div id="playerBody"></div></div></div>
+<footer>
+    BIRUXY MOVIES
+</footer>
 
-<div id="adminOverlay" class="overlay hidden">
-<div class="box">
-<button class="close" id="adminClose">×</button>
+
+<!-- ADMIN BUTTON -->
+
+<button
+    class="admin-btn"
+    onclick="openAdmin()"
+>
+    A
+</button>
+
+
+<!-- MOVIE PLAYER -->
+
+<div
+    id="playerOverlay"
+    class="overlay hidden"
+>
+
+<div class="modal">
+
+    <button
+        class="close"
+        onclick="closePlayer()"
+    >
+        ×
+    </button>
+
+    <div id="playerContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+
+<div
+    id="adminOverlay"
+    class="overlay hidden"
+>
+
+<div class="modal">
+
+<button
+    class="close"
+    onclick="closeAdmin()"
+>
+×
+</button>
+
+
+<!-- ADMIN LOGIN -->
+
 <div id="adminLogin">
-<h2>Admin Login</h2>
-<form class="form" id="adminLoginForm"><input id="adminUser" placeholder="Username" required><input id="adminPass" type="password" placeholder="Password" required><button class="primary">LOGIN</button></form>
-<p id="adminMsg" class="status"></p>
+
+    <h2>Admin Login</h2>
+
+    <form
+        class="form"
+        onsubmit="adminLogin(event)"
+    >
+
+        <input
+            id="adminUsername"
+            placeholder="Admin username"
+            required
+        >
+
+        <input
+            id="adminPassword"
+            type="password"
+            placeholder="Admin password"
+            required
+        >
+
+        <button class="primary">
+            LOGIN
+        </button>
+
+    </form>
+
+    <p
+        id="adminError"
+        class="status"
+    ></p>
+
 </div>
-<div id="adminDash" class="hidden">
-<div class="adminhead"><h2>Admin Dashboard</h2><button class="secondary" id="logout">LOGOUT</button></div>
-<form class="form" id="contentForm">
-<div class="row"><input id="title" placeholder="Movie title" required><select id="type"><option value="movies">MOVIES</option><option value="private">PRIVATE</option></select></div>
-<input id="poster" placeholder="Poster image URL" required>
-<input id="video" placeholder="Video URL (.mp4 or supported stream URL)" required>
-<textarea id="description" placeholder="Description"></textarea>
-<button class="primary">ADD CONTENT</button>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<div
+    id="adminDashboard"
+    class="hidden"
+>
+
+<div class="admin-head">
+
+    <h2>Admin Dashboard</h2>
+
+    <button
+        class="secondary"
+        onclick="adminLogout()"
+    >
+        LOGOUT
+    </button>
+
+</div>
+
+
+<form
+    class="form"
+    onsubmit="addContent(event)"
+>
+
+<div class="row">
+
+    <input
+        id="contentTitle"
+        placeholder="Movie title"
+        required
+    >
+
+    <select id="contentType">
+
+        <option value="movies">
+            MOVIES
+        </option>
+
+        <option value="private">
+            PRIVATE
+        </option>
+
+    </select>
+
+</div>
+
+
+<input
+    id="contentPoster"
+    placeholder="Poster image URL"
+    required
+>
+
+
+<input
+    id="contentVideo"
+    placeholder="Video URL"
+    required
+>
+
+
+<textarea
+    id="contentDescription"
+    placeholder="Movie description"
+></textarea>
+
+
+<button class="primary">
+    ADD CONTENT
+</button>
+
 </form>
-<div id="adminList" class="adminlist"></div>
+
+
+<h3 style="margin-top:30px">
+    Uploaded Content
+</h3>
+
+<div
+    id="adminList"
+    class="admin-list"
+></div>
+
 </div>
-</div></div>
+
+</div>
+
+</div>
+
 
 <script>
-const ADMIN_USER="shadab", ADMIN_PASS="biruxy*@786";
-let access=false;
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-function data(){return JSON.parse(localStorage.getItem("biruxy_movies_content")||"[]")}
-function save(x){localStorage.setItem("biruxy_movies_content",JSON.stringify(x))}
-function render(){
- const x=data();
- $("movieGrid").innerHTML=x.filter(a=>a.type==="movies").map(card).join("")||empty("No movies added yet.");
- $("privateGrid").innerHTML=x.filter(a=>a.type==="private").map(card).join("")||empty("No private content added yet.");
- renderAdmin();
+
+/* ===================================
+   ADMIN LOGIN
+=================================== */
+
+const ADMIN_USERNAME = "shadab";
+const ADMIN_PASSWORD = "biruxy*@786";
+
+
+/* ===================================
+   USER ACCESS
+=================================== */
+
+let userLoggedIn = false;
+
+
+/*
+   NOTE:
+   Production mein yahan backend API
+   ADUNLOCK username ko verify karega.
+*/
+
+function loginUser(){
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+    const status =
+        document.getElementById("status");
+
+    if(!username){
+
+        status.textContent =
+            "Please enter your username.";
+
+        return;
+    }
+
+    /*
+       Frontend access gate.
+
+       Real 12-hour verification:
+       Backend/database se connect karna hoga.
+    */
+
+    userLoggedIn = true;
+
+    status.textContent =
+        "Username accepted. You can now watch.";
+
+    status.style.color =
+        "#aaa";
 }
-function empty(t){return `<div class="empty">${t}</div>`}
-function card(a){return `<article class="card"><img class="poster" src="${esc(a.poster)}" onerror="this.src='https://via.placeholder.com/500x750/111/fff?text=BIRUXY'"><div class="cardbody"><h3>${esc(a.title)}</h3><p>${esc(a.description)}</p><button class="secondary" style="margin-top:10px;width:100%" onclick="watch('${encodeURIComponent(JSON.stringify(a))}')">WATCH NOW</button></div></article>`}
-window.watch=s=>{if(!access){alert("Please login with a valid username first.");return}const a=JSON.parse(decodeURIComponent(s));$("playerBody").innerHTML=`<video class="player" controls playsinline src="${esc(a.video)}"></video><div class="details"><h2>${esc(a.title)}</h2><p>${esc(a.description)}</p></div>`;$("playerOverlay").classList.remove("hidden")}
-$("playerClose").onclick=()=>{$("playerOverlay").classList.add("hidden");$("playerBody").innerHTML=""};
-document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("movies").classList.toggle("hidden",b.dataset.tab!=="movies");$("private").classList.toggle("hidden",b.dataset.tab!=="private")});
-$("loginBtn").onclick=()=>{const u=$("username").value.trim();if(!u){$("status").textContent="Enter your username.";return}access=true;$("status").textContent="Username accepted for this frontend session. Server-side 12-hour verification will replace this in production.";$("status").style.color="#aaa"};
-$("adminBtn").onclick=()=>{$("adminOverlay").classList.remove("hidden");$("adminLogin").classList.toggle("hidden",sessionStorage.admin!=="1");$("adminDash").classList.toggle("hidden",sessionStorage.admin!=="1")};
-$("adminClose").onclick=()=>$("adminOverlay").classList.add("hidden");
-$("adminLoginForm").onsubmit=e=>{e.preventDefault();if($("adminUser").value===ADMIN_USER&&$("adminPass").value===ADMIN_PASS){sessionStorage.admin="1";$("adminLogin").classList.add("hidden");$("adminDash").classList.remove("hidden");renderAdmin()}else $("adminMsg").textContent="Invalid admin credentials."};
-$("logout").onclick=()=>{sessionStorage.removeItem("admin");$("adminLogin").classList.remove("hidden");$("adminDash").classList.add("hidden")};
-$("contentForm").onsubmit=e=>{e.preventDefault();const x=data();x.unshift({id:Date.now(),title:$("title").value,poster:$("poster").value,video:$("video").value,description:$("description").value,type:$("type").value});save(x);e.target.reset();render();alert("Content added.");};
-window.del=id=>{save(data().filter(x=>x.id!==id));render()};
-function renderAdmin(){$("adminList").innerHTML=data().map(a=>`<div class="adminitem"><img src="${esc(a.poster)}"><div><b>${esc(a.title)}</b><br><small>${a.type.toUpperCase()}</small></div><button class="danger" onclick="del(${a.id})">DELETE</button></div>`).join("")}
-render();
+
+
+/* ===================================
+   CONTENT STORAGE
+=================================== */
+
+function getContent(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "biruxy_content"
+        ) || "[]"
+    );
+
+}
+
+
+function saveContent(content){
+
+    localStorage.setItem(
+        "biruxy_content",
+        JSON.stringify(content)
+    );
+
+}
+
+
+/* ===================================
+   HTML SAFETY
+=================================== */
+
+function escapeHTML(value){
+
+    return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ===================================
+   RENDER WEBSITE
+=================================== */
+
+function renderWebsite(){
+
+    const content =
+        getContent();
+
+
+    const movies =
+        content.filter(
+            item =>
+            item.type === "movies"
+        );
+
+
+    const privateItems =
+        content.filter(
+            item =>
+            item.type === "private"
+        );
+
+
+    const movieGrid =
+        document.getElementById(
+            "movieGrid"
+        );
+
+
+    const privateGrid =
+        document.getElementById(
+            "privateGrid"
+        );
+
+
+    movieGrid.innerHTML =
+        movies.length
+        ?
+        movies.map(createCard).join("")
+        :
+        `<div class="empty">
+            No movies available.
+         </div>`;
+
+
+    privateGrid.innerHTML =
+        privateItems.length
+        ?
+        privateItems.map(createCard).join("")
+        :
+        `<div class="empty">
+            No private content available.
+         </div>`;
+
+}
+
+
+/* ===================================
+   MOVIE CARD
+=================================== */
+
+function createCard(item){
+
+    return `
+
+    <article class="card">
+
+        <img
+            class="poster"
+            src="${escapeHTML(item.poster)}"
+            onerror="
+                this.src='https://via.placeholder.com/500x750/111/fff?text=BIRUXY'
+            "
+        >
+
+        <div class="card-body">
+
+            <h3>
+                ${escapeHTML(item.title)}
+            </h3>
+
+            <p>
+                ${escapeHTML(item.description)}
+            </p>
+
+            <button
+                class="secondary watch"
+                onclick="watchMovie(${item.id})"
+            >
+                WATCH NOW
+            </button>
+
+        </div>
+
+    </article>
+
+    `;
+
+}
+
+
+/* ===================================
+   WATCH MOVIE
+=================================== */
+
+function watchMovie(id){
+
+    if(!userLoggedIn){
+
+        alert(
+            "Please login with your ADUNLOCK username first."
+        );
+
+        return;
+    }
+
+
+    const content =
+        getContent();
+
+
+    const movie =
+        content.find(
+            item =>
+            item.id === id
+        );
+
+
+    if(!movie){
+        return;
+    }
+
+
+    document.getElementById(
+        "playerContent"
+    ).innerHTML = `
+
+        <video
+            class="video"
+            controls
+            playsinline
+            src="${escapeHTML(movie.video)}"
+        ></video>
+
+        <div class="movie-details">
+
+            <h2>
+                ${escapeHTML(movie.title)}
+            </h2>
+
+            <p>
+                ${escapeHTML(movie.description)}
+            </p>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "playerOverlay"
+    ).classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function closePlayer(){
+
+    document.getElementById(
+        "playerOverlay"
+    ).classList.add(
+        "hidden"
+    );
+
+    document.getElementById(
+        "playerContent"
+    ).innerHTML = "";
+
+}
+
+
+/* ===================================
+   TABS
+=================================== */
+
+function openTab(tab,button){
+
+    document
+    .querySelectorAll(
+        ".nav button"
+    )
+    .forEach(
+        btn =>
+        btn.classList.remove(
+            "active"
+        )
+    );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    document
+    .getElementById("movies")
+    .classList.toggle(
+        "hidden",
+        tab !== "movies"
+    );
+
+
+    document
+    .getElementById("private")
+    .classList.toggle(
+        "hidden",
+        tab !== "private"
+    );
+
+}
+
+
+/* ===================================
+   ADMIN OPEN
+=================================== */
+
+function openAdmin(){
+
+    document
+    .getElementById(
+        "adminOverlay"
+    )
+    .classList.remove(
+        "hidden"
+    );
+
+
+    if(
+        sessionStorage.getItem(
+            "biruxy_admin"
+        ) === "true"
+    ){
+
+        showDashboard();
+
+    }else{
+
+        showAdminLogin();
+
+    }
+
+}
+
+
+function closeAdmin(){
+
+    document
+    .getElementById(
+        "adminOverlay"
+    )
+    .classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* ===================================
+   ADMIN LOGIN
+=================================== */
+
+function adminLogin(event){
+
+    event.preventDefault();
+
+
+    const username =
+        document
+        .getElementById(
+            "adminUsername"
+        )
+        .value;
+
+
+    const password =
+        document
+        .getElementById(
+            "adminPassword"
+        )
+        .value;
+
+
+    if(
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
+    ){
+
+        sessionStorage.setItem(
+            "biruxy_admin",
+            "true"
+        );
+
+        showDashboard();
+
+    }else{
+
+        document
+        .getElementById(
+            "adminError"
+        )
+        .textContent =
+            "Invalid admin username or password.";
+
+    }
+
+}
+
+
+function showDashboard(){
+
+    document
+    .getElementById(
+        "adminLogin"
+    )
+    .classList.add(
+        "hidden"
+    );
+
+
+    document
+    .getElementById(
+        "adminDashboard"
+    )
+    .classList.remove(
+        "hidden"
+    );
+
+
+    renderAdmin();
+
+}
+
+
+function showAdminLogin(){
+
+    document
+    .getElementById(
+        "adminLogin"
+    )
+    .classList.remove(
+        "hidden"
+    );
+
+
+    document
+    .getElementById(
+        "adminDashboard"
+    )
+    .classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* ===================================
+   ADMIN LOGOUT
+=================================== */
+
+function adminLogout(){
+
+    sessionStorage.removeItem(
+        "biruxy_admin"
+    );
+
+    showAdminLogin();
+
+}
+
+
+/* ===================================
+   ADD CONTENT
+=================================== */
+
+function addContent(event){
+
+    event.preventDefault();
+
+
+    const content =
+        getContent();
+
+
+    content.unshift({
+
+        id:Date.now(),
+
+        title:
+            document
+            .getElementById(
+                "contentTitle"
+            )
+            .value
+            .trim(),
+
+        type:
+            document
+            .getElementById(
+                "contentType"
+            )
+            .value,
+
+        poster:
+            document
+            .getElementById(
+                "contentPoster"
+            )
+            .value
+            .trim(),
+
+        video:
+            document
+            .getElementById(
+                "contentVideo"
+            )
+            .value
+            .trim(),
+
+        description:
+            document
+            .getElementById(
+                "contentDescription"
+            )
+            .value
+            .trim()
+
+    });
+
+
+    saveContent(content);
+
+
+    event.target.reset();
+
+
+    renderWebsite();
+
+
+    renderAdmin();
+
+
+    alert(
+        "Content added successfully."
+    );
+
+}
+
+
+/* ===================================
+   ADMIN CONTENT LIST
+=================================== */
+
+function renderAdmin(){
+
+    const list =
+        document.getElementById(
+            "adminList"
+        );
+
+
+    const content =
+        getContent();
+
+
+    if(!content.length){
+
+        list.innerHTML =
+            `<div class="empty">
+                No content added yet.
+             </div>`;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        content.map(item => `
+
+        <div class="admin-item">
+
+            <img
+                src="${escapeHTML(item.poster)}"
+                onerror="
+                    this.src='https://via.placeholder.com/100x140/111/fff?text=BIRUXY'
+                "
+            >
+
+            <div class="admin-info">
+
+                <strong>
+                    ${escapeHTML(item.title)}
+                </strong>
+
+                <small>
+                    ${item.type.toUpperCase()}
+                </small>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="deleteContent(${item.id})"
+            >
+                DELETE
+            </button>
+
+        </div>
+
+        `).join("");
+
+}
+
+
+/* ===================================
+   DELETE CONTENT
+=================================== */
+
+function deleteContent(id){
+
+    const content =
+        getContent()
+        .filter(
+            item =>
+            item.id !== id
+        );
+
+
+    saveContent(content);
+
+
+    renderWebsite();
+
+
+    renderAdmin();
+
+}
+
+
+/* ===================================
+   START
+=================================== */
+
+renderWebsite();
+
 </script>
+
 </body>
 </html>
