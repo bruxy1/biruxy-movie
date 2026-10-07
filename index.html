@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,1165 +6,1376 @@
 <title>BIRUXY MOVIE</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#090018,#16002d,#001b32);
- color:#fff;
- min-height:100vh;
+*{
+  box-sizing:border-box;
 }
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left,#42106d 0,#12052d 35%,#020817 100%);
+}
 
 header{
- padding:18px 25px;
- display:flex;
- justify-content:space-between;
- align-items:center;
- background:#090909cc;
- backdrop-filter:blur(10px);
- position:sticky;
- top:0;
- z-index:10;
+  padding:22px;
+  text-align:center;
+  background:rgba(0,0,0,.35);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(10px);
 }
+
 .logo{
- font-size:25px;
- font-weight:900;
- letter-spacing:2px;
-}
-header button{
- background:#ff176d;
- color:#fff;
- border:0;
- padding:10px 16px;
- border-radius:10px;
- font-weight:bold;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#00eaff;
+  text-shadow:0 0 20px #00eaff88;
 }
 
-.center{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px;
+.container{
+  width:min(1150px,94%);
+  margin:auto;
+  padding:30px 0;
 }
 
-.loginbox{
- width:min(430px,100%);
- background:#11121b;
- padding:32px;
- border-radius:25px;
- box-shadow:0 20px 70px #0009;
- text-align:center;
- border:1px solid #333;
+.card{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+  backdrop-filter:blur(10px);
 }
 
-h1{
- margin-top:0;
+button{
+  border:0;
+  border-radius:12px;
+  padding:13px 20px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#00eaff;
+  color:#001018;
 }
 
-.muted{
- color:#9ea3b5;
+button:hover{
+  transform:translateY(-1px);
 }
 
-input,textarea{
- width:100%;
- padding:14px;
- margin:8px 0;
- border-radius:12px;
- border:1px solid #363949;
- background:#090b12;
- color:white;
- outline:none;
-}
-
-.primary{
- width:100%;
- border:0;
- padding:14px;
- border-radius:12px;
- background:linear-gradient(90deg,#ff176d,#7b2cff);
- color:white;
- font-weight:900;
- margin-top:10px;
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
 .secondary{
- width:100%;
- padding:13px;
- border-radius:12px;
- border:1px solid #414555;
- background:#171923;
- color:#fff;
- margin-top:10px;
+  background:#ffffff18;
+  color:white;
 }
 
-.error{
- color:#ff5f75;
- margin-top:12px;
+.danger{
+  background:#ff416c;
+  color:white;
 }
 
-.home{
- padding:30px;
- max-width:1200px;
- margin:auto;
+.input,
+textarea,
+select{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:1px solid #ffffff18;
+  border-radius:12px;
+  background:#070b1c;
+  color:white;
+  font-size:15px;
 }
+
+textarea{
+  resize:vertical;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LOGIN */
+
+#loginPage{
+  max-width:500px;
+  margin:13vh auto;
+  text-align:center;
+}
+
+#loginPage h1{
+  color:#00eaff;
+}
+
+.message{
+  min-height:25px;
+  color:#ffcf5a;
+}
+
+/* HOME */
 
 .hero{
- text-align:center;
- padding:45px 10px;
+  text-align:center;
+  margin-bottom:25px;
 }
 
 .hero h1{
- font-size:clamp(38px,7vw,75px);
- background:linear-gradient(90deg,#ff176d,#8b3dff,#00d4ff);
- -webkit-background-clip:text;
- color:transparent;
+  font-size:40px;
+  margin:5px 0;
 }
 
-.cards{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
- gap:25px;
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:25px 0;
 }
 
-.category{
- padding:35px;
- border-radius:25px;
- min-height:190px;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- text-align:center;
- cursor:pointer;
- transition:.2s;
+.tabs button.active{
+  background:#ff25d6;
+  color:white;
 }
 
-.category:hover{
- transform:translateY(-5px) scale(1.02);
-}
+/* MOVIES */
 
-.movies{
- background:linear-gradient(135deg,#ff176d,#7b2cff);
-}
-
-.private{
- background:linear-gradient(135deg,#00a8ff,#00d4a8);
-}
-
-.list{
- padding:30px;
- max-width:1200px;
- margin:auto;
-}
-
-.moviegrid{
- display:grid;
- grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
- gap:20px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:20px;
 }
 
 .movie{
- background:#11131c;
- border:1px solid #292d3a;
- border-radius:18px;
- overflow:hidden;
- cursor:pointer;
- transition:.2s;
+  overflow:hidden;
+  padding:0;
+  transition:.2s;
 }
 
 .movie:hover{
- transform:translateY(-5px);
+  transform:translateY(-4px);
 }
 
-.poster{
- width:100%;
- height:280px;
- object-fit:cover;
- background:#20232d;
+.movie img{
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  display:block;
+  background:#111;
 }
 
-.movieinfo{
- padding:15px;
+.movie-info{
+  padding:15px;
 }
 
-.movieinfo h3{
- margin:0 0 8px;
+.movie-title{
+  margin:0 0 8px;
+  font-size:18px;
 }
 
-.admin{
- padding:30px;
- max-width:1100px;
- margin:auto;
+.movie-description{
+  color:#bbb;
+  font-size:14px;
+  line-height:1.5;
+  min-height:42px;
 }
 
-.panel{
- background:#11131c;
- padding:25px;
- border:1px solid #292d3a;
- border-radius:20px;
- margin-bottom:20px;
+.watch{
+  width:100%;
+  margin-top:10px;
 }
 
-.adminGrid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
- gap:20px;
-}
+/* PLAYER */
 
-.item{
- padding:14px;
- border-bottom:1px solid #292d3a;
-}
-
-.delete{
- background:#ff174f;
- color:#fff;
- border:0;
- border-radius:8px;
- padding:7px 10px;
- float:right;
-}
-
-.player{
- max-width:1000px;
- margin:auto;
- padding:25px;
+#playerBox{
+  margin-top:30px;
 }
 
 video{
- width:100%;
- max-height:70vh;
- background:#000;
- border-radius:18px;
+  width:100%;
+  max-height:70vh;
+  background:#000;
+  border-radius:16px;
+  display:block;
 }
 
-.back{
- margin-bottom:15px;
+/* ADMIN */
+
+.admin-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.admin-item{
+  margin-top:12px;
+  padding:16px;
+  background:#ffffff08;
+  border:1px solid #ffffff12;
+  border-radius:14px;
+}
+
+.admin-item strong{
+  color:#00eaff;
+}
+
+.small{
+  color:#aaa;
+  font-size:13px;
+}
+
+@media(max-width:700px){
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .movie img{
+    height:230px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <div class="logo">BIRUXY MOVIE</div>
+</header>
+
+<div class="container">
+
 <!-- LOGIN -->
 
-<section id="login" class="center">
+<section id="loginPage" class="card">
 
-<div class="loginbox">
+  <h1>🎬 Welcome</h1>
 
-<div class="logo">BIRUXY MOVIE</div>
+  <p>
+    Enter the username generated from the ADUNLOCK website.
+  </p>
 
-<h1>LOGIN</h1>
+  <input
+    id="usernameInput"
+    class="input"
+    placeholder="USER-XXXXXXXX"
+    autocomplete="off"
+  >
 
-<p class="muted">
-Enter your ADUNLOCK username
-</p>
+  <button onclick="loginUser()">
+    LOGIN
+  </button>
 
-<input
-id="keyInput"
-placeholder="USER-XXXXXX"
-autocomplete="off">
+  <p id="loginMessage" class="message"></p>
 
-<button
-class="primary"
-onclick="login()">
-LOGIN
-</button>
-
-<button
-class="secondary"
-onclick="openUnlock()">
-GET USERNAME
-</button>
-
-<div id="loginError" class="error"></div>
-
-</div>
+  <button
+    class="secondary"
+    onclick="window.location.href='https://biruxy-movies.onrender.com'"
+  >
+    GET USERNAME
+  </button>
 
 </section>
 
 
 <!-- HOME -->
 
-<section id="home" class="hidden">
+<section id="homePage" class="hidden">
 
-<header>
+  <div class="card hero">
 
-<div class="logo">BIRUXY MOVIE</div>
+    <h1>🎬 BIRUXY MOVIE</h1>
 
-<button onclick="logout()">LOGOUT</button>
+    <p>
+      Welcome! Choose your section.
+    </p>
 
-</header>
+    <div class="tabs">
 
-<div class="home">
+      <button
+        id="moviesButton"
+        class="active"
+        onclick="changeCategory('movies')"
+      >
+        🎬 MOVIES
+      </button>
 
-<div class="hero">
+      <button
+        id="privateButton"
+        onclick="changeCategory('private')"
+      >
+        🔒 PRIVATE
+      </button>
 
-<h1>WELCOME</h1>
+      <button
+        class="secondary"
+        onclick="openAdmin()"
+      >
+        ⚙ ADMIN
+      </button>
 
-<p class="muted">
-Choose what you want to watch
-</p>
+    </div>
 
-</div>
-
-<div class="cards">
-
-<div
-class="category movies"
-onclick="showCategory('MOVIES')">
-
-<h2>🎬 MOVIES</h2>
-
-<p>Watch movies online</p>
-
-</div>
-
-<div
-class="category private"
-onclick="showCategory('PRIVATE')">
-
-<h2>🔒 PRIVATE</h2>
-
-<p>Private collection</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
+  </div>
 
 
-<!-- LIST -->
-
-<section id="list" class="hidden">
-
-<header>
-
-<div class="logo">BIRUXY MOVIE</div>
-
-<button onclick="showHome()">HOME</button>
-
-</header>
-
-<div class="list">
-
-<button
-class="secondary back"
-onclick="showHome()">
-← BACK
-</button>
-
-<h1 id="listTitle"></h1>
-
-<div
-id="movieGrid"
-class="moviegrid">
-</div>
-
-</div>
-
-</section>
+  <div id="movieGrid" class="grid"></div>
 
 
-<!-- PLAYER -->
+  <!-- PLAYER -->
 
-<section id="watch" class="hidden">
+  <div id="playerBox" class="card hidden">
 
-<header>
+    <h2 id="playerTitle"></h2>
 
-<div class="logo">BIRUXY MOVIE</div>
+    <p id="playerDescription"></p>
 
-<button onclick="showHome()">HOME</button>
+    <video
+      id="moviePlayer"
+      controls
+      playsinline
+    ></video>
 
-</header>
-
-<div class="player">
-
-<button
-class="secondary back"
-onclick="goBackList()">
-← BACK
-</button>
-
-<h1 id="watchTitle"></h1>
-
-<video
-id="videoPlayer"
-controls
-playsinline>
-</video>
-
-<p
-id="watchDescription"
-class="muted">
-</p>
-
-</div>
-
-</section>
-
-
-<!-- ADMIN LOGIN -->
-
-<section id="adminLogin" class="center hidden">
-
-<div class="loginbox">
-
-<div class="logo">ADMIN</div>
-
-<h2>Admin Login</h2>
-
-<input
-id="adminUser"
-placeholder="Username">
-
-<input
-id="adminPass"
-type="password"
-placeholder="Password">
-
-<button
-class="primary"
-onclick="adminLogin()">
-LOGIN
-</button>
-
-<button
-class="secondary"
-onclick="showLogin()">
-BACK
-</button>
-
-<div
-id="adminError"
-class="error">
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
 <!-- ADMIN -->
 
-<section id="admin" class="hidden">
+<section id="adminPage" class="hidden">
 
-<header>
+  <div class="card">
 
-<div class="logo">ADMIN PANEL</div>
+    <div class="admin-top">
 
-<button onclick="showHome()">HOME</button>
+      <h1>🔐 Admin Panel</h1>
 
-</header>
+      <button
+        class="secondary"
+        onclick="backHome()"
+      >
+        ← HOME
+      </button>
 
-<div class="admin">
+    </div>
 
-<div class="panel">
 
-<h2>Add Content</h2>
+    <!-- ADMIN LOGIN -->
 
-<div class="adminGrid">
+    <div id="adminLoginBox">
 
-<div>
+      <p>Login to manage your movies.</p>
 
-<label>Category</label>
+      <input
+        id="adminUsername"
+        class="input"
+        placeholder="Admin username"
+      >
 
-<select
-id="contentType"
-style="
-width:100%;
-padding:14px;
-margin:8px 0;
-border-radius:12px;
-background:#090b12;
-color:#fff;
-border:1px solid #363949">
+      <input
+        id="adminPassword"
+        class="input"
+        type="password"
+        placeholder="Admin password"
+      >
 
-<option value="MOVIES">MOVIES</option>
-<option value="PRIVATE">PRIVATE</option>
+      <button onclick="adminLogin()">
+        ADMIN LOGIN
+      </button>
 
-</select>
+      <p id="adminLoginMessage" class="message"></p>
 
-<input
-id="contentTitle"
-placeholder="Movie title">
+    </div>
 
-<input
-id="contentPoster"
-placeholder="Poster URL">
 
-<input
-id="contentVideo"
-placeholder="Video URL">
+    <!-- ADMIN DASHBOARD -->
 
-<textarea
-id="contentDescription"
-rows="5"
-placeholder="Description">
-</textarea>
+    <div id="adminDashboard" class="hidden">
 
-<button
-class="primary"
-onclick="addContent()">
-ADD CONTENT
-</button>
+      <hr>
 
-</div>
+      <h2>➕ Add Movie</h2>
 
-<div>
+      <div class="form-grid">
 
-<h3>Current Content</h3>
+        <div>
 
-<div id="adminList"></div>
+          <label>Movie Title</label>
 
-</div>
+          <input
+            id="movieTitle"
+            class="input"
+            placeholder="Movie title"
+          >
 
-</div>
+        </div>
 
-</div>
 
-</div>
+        <div>
+
+          <label>Category</label>
+
+          <select
+            id="movieCategory"
+            class="input"
+          >
+
+            <option value="movies">
+              MOVIES
+            </option>
+
+            <option value="private">
+              PRIVATE
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <label>Description</label>
+
+      <textarea
+        id="movieDescription"
+        class="input"
+        rows="4"
+        placeholder="Movie description"
+      ></textarea>
+
+
+      <div class="form-grid">
+
+        <div>
+
+          <label>Poster File</label>
+
+          <input
+            id="posterFile"
+            class="input"
+            type="file"
+            accept="image/*"
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>Video File</label>
+
+          <input
+            id="videoFile"
+            class="input"
+            type="file"
+            accept="video/*"
+          >
+
+        </div>
+
+      </div>
+
+
+      <p class="small">
+        Agar file upload nahi karna hai to direct URL bhi use kar sakte ho.
+      </p>
+
+
+      <input
+        id="posterUrl"
+        class="input"
+        placeholder="Poster URL (optional)"
+      >
+
+
+      <input
+        id="videoUrl"
+        class="input"
+        placeholder="Video URL (optional)"
+      >
+
+
+      <button onclick="uploadMovie()">
+        🚀 UPLOAD MOVIE
+      </button>
+
+
+      <button
+        class="secondary"
+        onclick="adminLogout()"
+      >
+        LOGOUT
+      </button>
+
+
+      <p
+        id="uploadMessage"
+        class="message"
+      ></p>
+
+
+      <hr>
+
+      <h2>📚 Uploaded Movies</h2>
+
+      <div id="adminMovieList"></div>
+
+    </div>
+
+  </div>
 
 </section>
+
+</div>
 
 
 <script>
 
-/* =========================================
-   BACKEND
-   ========================================= */
+/* =========================
+   SETTINGS
+========================= */
 
-const ACCESS_API =
-"https://biruxy-access-api.onrender.com";
+const API =
+  "https://biruxy-access-api.onrender.com";
 
-
-/* =========================================
-   ADUNLOCK WEBSITE
-   ========================================= */
-
-const UNLOCK_SITE =
-"https://biruxy-movies.onrender.com";
+const USER_SITE =
+  "https://biruxy-movies.onrender.com";
 
 
-/* =========================================
-   CONTENT
-   ========================================= */
+/* =========================
+   VARIABLES
+========================= */
 
-let content =
-JSON.parse(
-localStorage.getItem("biruxy_content") || "[]"
-);
+let movies = [];
 
-let currentCategory="MOVIES";
+let category = "movies";
 
-let currentMovie=null;
+let adminToken =
+  localStorage.getItem("biruxy_admin_token") || "";
 
 
-/* =========================================
-   SCREEN HELPER
-   ========================================= */
+/* =========================
+   HELPERS
+========================= */
 
-function hideAll(){
+function $(id){
+  return document.getElementById(id);
+}
 
-[
-"login",
-"home",
-"list",
-"watch",
-"adminLogin",
-"admin"
-].forEach(id=>{
 
-document
-.getElementById(id)
-.classList.add("hidden");
+function showPage(page){
 
-});
+  $("loginPage").classList.add("hidden");
+
+  $("homePage").classList.add("hidden");
+
+  $("adminPage").classList.add("hidden");
+
+  $(page).classList.remove("hidden");
 
 }
 
 
-/* =========================================
-   LOGIN
-   ========================================= */
+/* =========================
+   USER LOGIN
+========================= */
 
-async function login(){
+async function loginUser(){
 
-const input =
-document.getElementById("keyInput");
+  const username =
+    $("usernameInput").value.trim().toUpperCase();
 
-const key =
-input.value.trim().toUpperCase();
+  if(!username){
 
-const error =
-document.getElementById("loginError");
+    $("loginMessage").textContent =
+      "Please enter your username.";
 
-error.textContent="";
+    return;
+  }
 
+  $("loginMessage").textContent =
+    "Checking username...";
 
-if(!key){
+  try{
 
-error.textContent=
-"Please enter your username.";
+    const response =
+      await fetch(
+        API + "/api/keys/verify",
+        {
+          method:"POST",
 
-return;
+          headers:{
+            "Content-Type":"application/json"
+          },
 
-}
-
-
-try{
-
-const response =
-await fetch(
-ACCESS_API+"/api/keys/verify",
-{
-method:"POST",
-
-headers:{
-"Content-Type":
-"application/json"
-},
-
-body:JSON.stringify({
-key:key
-})
-});
+          body:JSON.stringify({
+            key:username
+          })
+        }
+      );
 
 
-const data =
-await response.json();
+    const data =
+      await response.json();
 
 
-if(!response.ok || !data.valid){
+    if(!response.ok){
 
-error.textContent =
-data.error ||
-"Invalid or expired username.";
+      throw new Error(
+        data.error || "Invalid username."
+      );
 
-return;
-
-}
+    }
 
 
-sessionStorage.setItem(
-"biruxy_key",
-key
-);
+    showPage("homePage");
 
+    await loadMovies();
 
-showHome();
+  }catch(error){
 
+    $("loginMessage").textContent =
+      error.message;
 
-}catch(e){
-
-error.textContent =
-"Server connection failed. Please try again.";
-
-}
+  }
 
 }
 
 
-/* =========================================
-   URL KEY AUTO LOGIN
-   ========================================= */
+/* =========================
+   LOAD MOVIES
+========================= */
 
-async function checkUrlKey(){
+async function loadMovies(){
 
-const params =
-new URLSearchParams(
-window.location.search
-);
+  $("movieGrid").innerHTML =
+    "<div class='card'>Loading movies...</div>";
 
-const key =
-params.get("key");
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/movies"
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Could not load movies."
+      );
+
+    }
 
 
-if(key){
+    movies =
+      await response.json();
 
-document
-.getElementById("keyInput")
-.value=key;
 
-await login();
+    renderMovies();
+
+  }catch(error){
+
+    $("movieGrid").innerHTML =
+      `<div class="card">
+        ${escapeHtml(error.message)}
+      </div>`;
+
+  }
 
 }
 
-}
 
-
-/* =========================================
-   HOME
-   ========================================= */
-
-function showHome(){
-
-hideAll();
-
-document
-.getElementById("home")
-.classList.remove("hidden");
-
-}
-
-
-/* =========================================
+/* =========================
    CATEGORY
-   ========================================= */
+========================= */
 
-function showCategory(category){
+function changeCategory(value){
 
-currentCategory=category;
+  category = value;
 
-hideAll();
+  $("moviesButton")
+    .classList.toggle(
+      "active",
+      value === "movies"
+    );
 
-document
-.getElementById("list")
-.classList.remove("hidden");
+  $("privateButton")
+    .classList.toggle(
+      "active",
+      value === "private"
+    );
 
-document
-.getElementById("listTitle")
-.textContent =
-category;
-
-
-renderMovies();
+  renderMovies();
 
 }
 
 
-/* =========================================
-   MOVIE LIST
-   ========================================= */
+/* =========================
+   RENDER MOVIES
+========================= */
 
 function renderMovies(){
 
-const grid =
-document.getElementById("movieGrid");
-
-const filtered =
-content.filter(
-x=>x.type===currentCategory
-);
+  const list =
+    movies.filter(
+      movie =>
+        movie.category === category
+    );
 
 
-if(!filtered.length){
+  if(!list.length){
 
-grid.innerHTML =
-`
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:50px">
+    $("movieGrid").innerHTML =
+      `<div class="card">
+        No ${category === "private" ? "private " : ""}movies uploaded yet.
+      </div>`;
 
-<h2>No content yet</h2>
+    return;
 
-<p class="muted">
-Admin has not added anything here.
-</p>
+  }
 
-</div>
-`;
 
-return;
+  $("movieGrid").innerHTML =
+    list.map(movie => {
+
+      const poster =
+        movie.poster || "";
+
+
+      return `
+        <article class="movie card">
+
+          ${
+            poster
+            ?
+            `<img
+              src="${escapeAttribute(poster)}"
+              alt="${escapeAttribute(movie.title)}"
+              onerror="this.style.display='none'"
+            >`
+            :
+            `<div
+              style="
+                height:270px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#111;
+                font-size:50px;
+              "
+            >
+              🎬
+            </div>`
+          }
+
+
+          <div class="movie-info">
+
+            <h3 class="movie-title">
+              ${escapeHtml(movie.title)}
+            </h3>
+
+
+            <div class="movie-description">
+              ${escapeHtml(
+                movie.description || ""
+              )}
+            </div>
+
+
+            <button
+              class="watch"
+              onclick="watchMovie('${movie.id}')"
+            >
+              ▶ WATCH
+            </button>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
 
 }
 
 
-grid.innerHTML =
-filtered.map(
-(movie,index)=>`
-
-<div
-class="movie"
-onclick="watchMovie(${index})">
-
-<img
-class="poster"
-src="${escapeAttr(movie.poster)}"
-onerror="this.style.display='none'">
-
-<div class="movieinfo">
-
-<h3>
-${escapeHtml(movie.title)}
-</h3>
-
-<p class="muted">
-${escapeHtml(movie.description || "")}
-</p>
-
-</div>
-
-</div>
-
-`
-).join("");
-
-}
-
-
-/* =========================================
+/* =========================
    WATCH
-   ========================================= */
+========================= */
 
-function watchMovie(index){
+function watchMovie(id){
 
-const movies =
-content.filter(
-x=>x.type===currentCategory
-);
+  const movie =
+    movies.find(
+      item => item.id === id
+    );
 
-currentMovie =
-movies[index];
+  if(!movie){
 
-if(!currentMovie)return;
+    return;
 
-hideAll();
+  }
 
-document
-.getElementById("watch")
-.classList.remove("hidden");
 
-document
-.getElementById("watchTitle")
-.textContent =
-currentMovie.title;
+  $("playerTitle").textContent =
+    movie.title;
 
-document
-.getElementById("watchDescription")
-.textContent =
-currentMovie.description || "";
 
-const player =
-document.getElementById("videoPlayer");
+  $("playerDescription").textContent =
+    movie.description || "";
 
-player.src =
-currentMovie.video || "";
+
+  const player =
+    $("moviePlayer");
+
+
+  player.pause();
+
+  player.src =
+    movie.video || "";
+
+
+  player.load();
+
+
+  $("playerBox")
+    .classList.remove("hidden");
+
+
+  $("playerBox")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
 
 }
 
 
-/* =========================================
-   BACK TO LIST
-   ========================================= */
+/* =========================
+   ADMIN PAGE
+========================= */
 
-function goBackList(){
+function openAdmin(){
 
-showCategory(currentCategory);
+  showPage("adminPage");
+
+
+  if(adminToken){
+
+    $("adminLoginBox")
+      .classList.add("hidden");
+
+    $("adminDashboard")
+      .classList.remove("hidden");
+
+    loadAdminMovies();
+
+  }else{
+
+    $("adminLoginBox")
+      .classList.remove("hidden");
+
+    $("adminDashboard")
+      .classList.add("hidden");
+
+  }
 
 }
 
 
-/* =========================================
+function backHome(){
+
+  showPage("homePage");
+
+  loadMovies();
+
+}
+
+
+/* =========================
    ADMIN LOGIN
-   ========================================= */
+========================= */
 
-function adminLogin(){
+async function adminLogin(){
 
-const user =
-document
-.getElementById("adminUser")
-.value;
+  const username =
+    $("adminUsername").value;
 
-const pass =
-document
-.getElementById("adminPass")
-.value;
+  const password =
+    $("adminPassword").value;
 
 
-if(
-user==="shadab" &&
-pass==="biruxy*@786"
-){
-
-hideAll();
-
-document
-.getElementById("admin")
-.classList.remove("hidden");
-
-renderAdmin();
-
-}else{
-
-document
-.getElementById("adminError")
-.textContent =
-"Invalid admin login.";
-
-}
-
-}
+  $("adminLoginMessage").textContent =
+    "Logging in...";
 
 
-/* =========================================
-   ADD CONTENT
-   ========================================= */
+  try{
 
-function addContent(){
+    const response =
+      await fetch(
+        API + "/api/admin/login",
+        {
+          method:"POST",
 
-const type =
-document
-.getElementById("contentType")
-.value;
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
 
-const title =
-document
-.getElementById("contentTitle")
-.value.trim();
-
-const poster =
-document
-.getElementById("contentPoster")
-.value.trim();
-
-const video =
-document
-.getElementById("contentVideo")
-.value.trim();
-
-const description =
-document
-.getElementById("contentDescription")
-.value.trim();
+          body:JSON.stringify({
+            username,
+            password
+          })
+        }
+      );
 
 
-if(!title){
-
-alert("Please enter title.");
-
-return;
-
-}
+    const data =
+      await response.json();
 
 
-content.push({
-type,
-title,
-poster,
-video,
-description
-});
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Admin login failed."
+      );
+
+    }
 
 
-saveContent();
+    adminToken =
+      data.token;
 
-renderAdmin();
+
+    localStorage.setItem(
+      "biruxy_admin_token",
+      adminToken
+    );
 
 
-[
-"contentTitle",
-"contentPoster",
-"contentVideo",
-"contentDescription"
-].forEach(
-id=>{
-document.getElementById(id).value="";
-});
+    $("adminLoginBox")
+      .classList.add("hidden");
 
+
+    $("adminDashboard")
+      .classList.remove("hidden");
+
+
+    $("adminLoginMessage")
+      .textContent = "";
+
+
+    loadAdminMovies();
+
+
+  }catch(error){
+
+    $("adminLoginMessage").textContent =
+      error.message;
+
+  }
 
 }
 
 
-/* =========================================
-   SAVE
-   ========================================= */
+/* =========================
+   UPLOAD MOVIE
+========================= */
 
-function saveContent(){
+async function uploadMovie(){
 
-localStorage.setItem(
-"biruxy_content",
-JSON.stringify(content)
-);
+  if(!adminToken){
+
+    $("uploadMessage").textContent =
+      "Please login as admin first.";
+
+    return;
+
+  }
+
+
+  const title =
+    $("movieTitle").value.trim();
+
+
+  if(!title){
+
+    $("uploadMessage").textContent =
+      "Movie title is required.";
+
+    return;
+
+  }
+
+
+  const posterFile =
+    $("posterFile").files[0];
+
+
+  const videoFile =
+    $("videoFile").files[0];
+
+
+  const posterUrl =
+    $("posterUrl").value.trim();
+
+
+  const videoUrl =
+    $("videoUrl").value.trim();
+
+
+  if(!posterFile && !posterUrl){
+
+    $("uploadMessage").textContent =
+      "Upload a poster or enter poster URL.";
+
+    return;
+
+  }
+
+
+  if(!videoFile && !videoUrl){
+
+    $("uploadMessage").textContent =
+      "Upload a video or enter video URL.";
+
+    return;
+
+  }
+
+
+  const form =
+    new FormData();
+
+
+  form.append(
+    "title",
+    title
+  );
+
+
+  form.append(
+    "description",
+    $("movieDescription").value.trim()
+  );
+
+
+  form.append(
+    "category",
+    $("movieCategory").value
+  );
+
+
+  form.append(
+    "posterUrl",
+    posterUrl
+  );
+
+
+  form.append(
+    "videoUrl",
+    videoUrl
+  );
+
+
+  if(posterFile){
+
+    form.append(
+      "poster",
+      posterFile
+    );
+
+  }
+
+
+  if(videoFile){
+
+    form.append(
+      "video",
+      videoFile
+    );
+
+  }
+
+
+  $("uploadMessage").textContent =
+    "Uploading... Please wait.";
+
+
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/movies",
+        {
+          method:"POST",
+
+          headers:{
+            Authorization:
+              "Bearer " + adminToken
+          },
+
+          body:form
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Upload failed."
+      );
+
+    }
+
+
+    $("uploadMessage").textContent =
+      "✅ Movie uploaded successfully!";
+
+
+    $("movieTitle").value = "";
+
+    $("movieDescription").value = "";
+
+    $("posterUrl").value = "";
+
+    $("videoUrl").value = "";
+
+    $("posterFile").value = "";
+
+    $("videoFile").value = "";
+
+
+    await loadAdminMovies();
+
+
+  }catch(error){
+
+    $("uploadMessage").textContent =
+      "❌ " + error.message;
+
+  }
 
 }
 
 
-/* =========================================
-   ADMIN LIST
-   ========================================= */
+/* =========================
+   ADMIN MOVIE LIST
+========================= */
 
-function renderAdmin(){
+async function loadAdminMovies(){
 
-const box =
-document.getElementById("adminList");
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/movies"
+      );
 
 
-if(!content.length){
+    movies =
+      await response.json();
 
-box.innerHTML =
-'<p class="muted">No content.</p>';
 
-return;
+    renderMovies();
+
+
+    if(!movies.length){
+
+      $("adminMovieList").innerHTML =
+        "<p>No movies uploaded.</p>";
+
+      return;
+
+    }
+
+
+    $("adminMovieList").innerHTML =
+      movies.map(movie => {
+
+        return `
+          <div class="admin-item">
+
+            <strong>
+              ${escapeHtml(movie.title)}
+            </strong>
+
+            <div class="small">
+              Category:
+              ${escapeHtml(movie.category)}
+            </div>
+
+            <br>
+
+            <button
+              class="danger"
+              onclick="deleteMovie('${movie.id}')"
+            >
+              🗑 DELETE
+            </button>
+
+          </div>
+        `;
+
+      }).join("");
+
+
+  }catch(error){
+
+    $("adminMovieList").innerHTML =
+      "<p>Could not load movie list.</p>";
+
+  }
 
 }
 
 
-box.innerHTML =
-content.map(
-(x,i)=>`
-
-<div class="item">
-
-<b>${escapeHtml(x.title)}</b>
-
-<br>
-
-<small class="muted">
-${x.type}
-</small>
-
-<button
-class="delete"
-onclick="deleteContent(${i})">
-DELETE
-</button>
-
-</div>
-
-`
-).join("");
-
-}
-
-
-/* =========================================
+/* =========================
    DELETE
-   ========================================= */
+========================= */
 
-function deleteContent(index){
+async function deleteMovie(id){
 
-if(
-!confirm("Delete this content?")
-)return;
+  if(!confirm(
+    "Are you sure you want to delete this movie?"
+  )){
 
-content.splice(index,1);
+    return;
 
-saveContent();
-
-renderAdmin();
-
-}
+  }
 
 
-/* =========================================
-   GET USERNAME
-   ========================================= */
+  try{
 
-function openUnlock(){
+    const response =
+      await fetch(
+        API + "/api/movies/" + id,
+        {
+          method:"DELETE",
 
-window.location.href =
-UNLOCK_SITE;
-
-}
-
-
-/* =========================================
-   LOGOUT
-   ========================================= */
-
-function logout(){
-
-sessionStorage.removeItem(
-"biruxy_key"
-);
-
-showLogin();
-
-}
+          headers:{
+            Authorization:
+              "Bearer " + adminToken
+          }
+        }
+      );
 
 
-/* =========================================
-   LOGIN SCREEN
-   ========================================= */
+    const data =
+      await response.json();
 
-function showLogin(){
 
-hideAll();
+    if(!response.ok){
 
-document
-.getElementById("login")
-.classList.remove("hidden");
+      throw new Error(
+        data.error ||
+        "Delete failed."
+      );
+
+    }
+
+
+    await loadAdminMovies();
+
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
 
 }
 
 
-/* =========================================
-   ADMIN SHORTCUT
-   CTRL + SHIFT + A
-   ========================================= */
+/* =========================
+   ADMIN LOGOUT
+========================= */
 
-document.addEventListener(
-"keydown",
-function(e){
+function adminLogout(){
 
-if(
-e.ctrlKey &&
-e.shiftKey &&
-e.key.toLowerCase()==="a"
-){
+  adminToken = "";
 
-hideAll();
+  localStorage.removeItem(
+    "biruxy_admin_token"
+  );
 
-document
-.getElementById("adminLogin")
-.classList.remove("hidden");
+  location.reload();
 
 }
 
-});
 
-
-/* =========================================
-   ESCAPE HTML
-   ========================================= */
+/* =========================
+   SECURITY DISPLAY HELPERS
+========================= */
 
 function escapeHtml(value){
 
-return String(value || "")
-.replace(
-/[&<>"']/g,
-function(char){
-
-return {
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[char];
-
-});
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-function escapeAttr(value){
+function escapeAttribute(value){
 
-return escapeHtml(value);
+  return escapeHtml(value);
 
 }
 
 
-/* =========================================
-   START
-   ========================================= */
+/* =========================
+   AUTO LOGIN FROM ?key=
+========================= */
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
-checkUrlKey();
 
-});
+const keyFromUrl =
+  params.get("key");
+
+
+if(keyFromUrl){
+
+  $("usernameInput").value =
+    keyFromUrl;
+
+  loginUser();
+
+}
 
 </script>
 
